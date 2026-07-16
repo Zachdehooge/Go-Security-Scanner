@@ -1,4 +1,4 @@
-module github.com/zachdehooge/Go-Security-Scanner
+module github.com/zachdehooge/VTScan
 
 go 1.23.0
 

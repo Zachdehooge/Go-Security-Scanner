@@ -2,13 +2,9 @@
 A GO CLI application that makes a call to the Virus Total API and pulls information regarding a specified SHA-256 hash
 
 ## Usage
-- Make a `.env` file and add the key `apikey` to the file and input the apikey: 
-    - Ex: `apikey=ENTERKEYHERE`
-
+- Export your VirusTotal API key to your environment variables:
     - Virus Totals website -> Click Profile -> API Key
+    - Ex: `export VTAPIKEY="APIKEYHERE"` on Linux
+- Run VTScan `./vtscan` and you will be prompted for the SHA-256 hash of the sample
 
-![Go-VT-Scanner](Go-VT-Scanner.png)
-
-## TODO
-- Implement Lipgloss
-- Implement Testing for API
+![VTScan](VTScan.png)

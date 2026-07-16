@@ -2,26 +2,16 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 
 	"github.com/antonholmquist/jason"
-	"github.com/joho/godotenv"
 )
 
 // 1445f8dc16bf7f0e1c7b3d16bee14ef83e6170ab00a2381d509051c64617fbfd
 func fileScan(sha256 string) {
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	apikey := os.Getenv("apikey")
-
-	fmt.Println("\nStarting the Virus Total Scan...")
-	fmt.Println("")
+	apikey := os.Getenv("VTAPIKEY")
 
 	url := "https://www.virustotal.com/api/v3/files/" + sha256
 
@@ -62,9 +52,6 @@ func fileScan(sha256 string) {
 	fmt.Println("\nReputation: ", repCat)
 
 	defer res.Body.Close()
-
-	fmt.Println("\nVirus Total Scan Complete...")
-	fmt.Println()
 }
 
 func main() {
