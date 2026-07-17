@@ -61,10 +61,10 @@ func main() {
 
 	flag.Parse()
 
-	f := *sha256Flag
+	sha256F := *sha256Flag
 
-	if f != "" {
-		fileScan(f)
+	if sha256F != "" {
+		fileScan(sha256F)
 	} else {
 		var i string
 		fmt.Print("\nSHA256 of Sample: ")
