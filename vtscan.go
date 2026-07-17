@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"os"
@@ -8,7 +9,7 @@ import (
 	"github.com/antonholmquist/jason"
 )
 
-// 1445f8dc16bf7f0e1c7b3d16bee14ef83e6170ab00a2381d509051c64617fbfd
+// 1445f8dc16bf7f0e1c7b3d16bee14ef83e6170ab00a2381d509051c64617fbfd / proquota.exe
 func fileScan(sha256 string) {
 
 	apikey := os.Getenv("VTAPIKEY")
@@ -34,9 +35,10 @@ func fileScan(sha256 string) {
 	confirmedtimeoutCat, _ := v.GetInt64("data", "attributes", "last_analysis_stats", "confirmed-timeout")
 	failureCat, _ := v.GetInt64("data", "attributes", "last_analysis_stats", "failure")
 	unsupportCat, _ := v.GetInt64("data", "attributes", "last_analysis_stats", "type-unsupported")
-
 	repCat, _ := v.GetInt64("data", "attributes", "reputation")
+	//popName, _ := v.GetStringArray("data", "attributes", "popular_threat_classification", "popular_threat_name", "value")
 
+	//fmt.Println("\nThreat Names: ", popName)
 	fmt.Println("\nThreat Label: ", threatLabel)
 	fmt.Println("____________________________________")
 	fmt.Println("\nMalicious: ", malCat)
@@ -55,9 +57,18 @@ func fileScan(sha256 string) {
 }
 
 func main() {
-	var i string
+	var sha256Flag = flag.String("sha256", "", "SHA256 to check")
 
-	fmt.Print("\nSHA256 of Sample: ")
-	fmt.Scan(&i)
-	fileScan(i)
+	flag.Parse()
+
+	f := *sha256Flag
+
+	if f != "" {
+		fileScan(f)
+	} else {
+		var i string
+		fmt.Print("\nSHA256 of Sample: ")
+		fmt.Scan(&i)
+		fileScan(i)
+	}
 }
